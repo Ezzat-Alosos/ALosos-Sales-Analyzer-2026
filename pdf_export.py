@@ -73,23 +73,17 @@ except ImportError:
 PROGRAM_NAME = "نظام العصعص لتحليل المبيعات"
 PROGRAM_SUBTITLE = "AL-osos Professional Sales Analyzer 2026"
 
-
+#===============
 def _register_arabic_font() -> str:
-    """تسجيل خط عربي متوفر على Windows أو استخدام Helvetica كحل آمن."""
-    candidates = [
-        r"C:\Windows\Fonts\arial.ttf",
-        r"C:\Windows\Fonts\tahoma.ttf",
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-    ]
-    for path in candidates:
-        if os.path.exists(path):
-            pdfmetrics.registerFont(TTFont("ArabicFont", path))
-            return "ArabicFont"
-    return "Helvetica"
+    pdfmetrics.registerFont(
+        TTFont("ArabicFont", "arial.ttf")
+    )
+    return "ArabicFont"
 
 
 FONT_NAME = _register_arabic_font()
 
+#=====================
 
 def _rtl(value) -> str:
     text = "" if pd.isna(value) else str(value)
